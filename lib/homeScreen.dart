@@ -1,6 +1,8 @@
 import 'package:class_ten/countryClass.dart';
 import 'package:flutter/material.dart';
 
+import 'detailScreen.dart';
+
 class homeScreen extends StatelessWidget {
   const homeScreen({
     Key? key,
@@ -10,26 +12,26 @@ class homeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     List countries = [];
     countries
-        .add(Country(name: 'Bangladesh', continent: 'Asia', flag: 'bd.png'));
+        .add(Country(name: 'Bangladesh', continent: 'Asia', flag: 'assets/bd.png'));
     countries.add(
-        Country(name: 'Turkey', continent: 'Middle East', flag: 'turkey.png'));
+        Country(name: 'Turkey', continent: 'Middle East', flag: 'assets/turkey.png'));
     countries
-        .add(Country(name: 'France', continent: 'Europe', flag: 'france.png'));
+        .add(Country(name: 'France', continent: 'Europe', flag: 'assets/france.png'));
     countries.add(
-        Country(name: 'Germany', continent: 'Europe', flag: 'germany.png'));
+        Country(name: 'Germany', continent: 'Europe', flag: 'assets/germany.png'));
     countries
-        .add(Country(name: 'Italy', continent: 'Europe', flag: 'italy.png'));
+        .add(Country(name: 'Italy', continent: 'Europe', flag: 'assets/italy.png'));
     countries.add(Country(
-        name: 'Mexico', continent: 'North America', flag: 'mexico.png'));
+        name: 'Mexico', continent: 'North America', flag: 'assets/mexico.png'));
     countries.add(Country(
-        name: 'United States', continent: 'North America', flag: 'us.png'));
+        name: 'United States', continent: 'North America', flag: 'assets/us.png'));
     countries.add(
-        Country(name: 'Thailand', continent: 'Asia', flag: 'thailand.png'));
+        Country(name: 'Thailand', continent: 'Asia', flag: 'assets/thailand.png'));
     countries
-        .add(Country(name: 'Spain', continent: 'Europe', flag: 'spain.png'));
+        .add(Country(name: 'Spain', continent: 'Europe', flag: 'assets/spain.png'));
     countries.add(
-        Country(name: 'United Kingdom', continent: 'Europe', flag: 'uk.png'));
-    countries.add(Country(name: 'China', continent: 'Asia', flag: 'china.png'));
+        Country(name: 'United Kingdom', continent: 'Europe', flag: 'assets/uk.png'));
+    countries.add(Country(name: 'China', continent: 'Asia', flag: 'assets/china.png'));
 
     return Scaffold(
       backgroundColor: Colors.green,
@@ -42,12 +44,27 @@ class homeScreen extends StatelessWidget {
       body: ListView.builder(
         itemBuilder: (BuildContext context, int index) => Card(
           child: ListTile(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => detailScreen(
+                    name: countries[index].name,
+                    continent: countries[index].continent,
+                    flag: countries[index].flag,
+                  ),
+                ),
+              );
+            },
             leading: CircleAvatar(
-              backgroundImage: AssetImage('assets/${countries[index].flag}'),
+              backgroundImage: AssetImage(countries[index].flag),
             ),
             title: Text(countries[index].name),
             subtitle: Text(countries[index].continent),
-            trailing: Icon(Icons.arrow_right, color: Colors.green,),
+            trailing: Icon(
+              Icons.arrow_right,
+              color: Colors.green,
+            ),
           ),
           elevation: 0,
         ),
